@@ -1,0 +1,171 @@
+.CarsListHolder {
+  width: 95%;
+  height: 800px;
+  /* border: 1px solid red; */
+  margin-left: 5%;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 20px;
+
+  /* padding: 20px; */
+  /*  position: relative;
+  top: 150px; */
+  /* left: 7%; */
+}
+
+.CarsListHolder > h1 {
+  margin: 100px auto;
+  font-size: 50px;
+}
+
+.Cars {
+  transition: 0.5s;
+  width: 330px;
+  height: 360px;
+
+  overflow: hidden;
+  border-radius: 10px;
+
+  border: 2px solid #e2e2e6;
+  background-color: #ffffff;
+
+  position: relative;
+  box-shadow: none;
+}
+
+.Cars:hover {
+  box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.1);
+}
+
+.Cars > img {
+  width: 100%;
+  cursor: pointer;
+}
+
+.Price {
+  display: flex;
+  margin-top: 20px;
+  position: relative;
+}
+
+.CarName,
+.Price > h3 {
+  color: #26215b;
+  margin: 0;
+  margin-left: 20px;
+}
+
+.Price > h3 {
+  font-size: 26px;
+}
+
+.CarName {
+  font-size: 20px;
+  margin-top: 10px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  max-width: fit-content;
+}
+
+.CarDetail,
+.Price > h4 {
+  font-size: 14px;
+  color: #3b376a;
+  margin: 0;
+}
+
+.Price > h4 {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+
+.CarDetail {
+  margin-top: 5px;
+  margin-left: 20px;
+  letter-spacing: 1px;
+}
+
+.CarLocation {
+  display: block;
+  width: 90%;
+
+  font-size: 12px;
+  margin-left: 20px;
+  margin-top: 5px;
+  padding-top: 10px;
+
+  text-indent: 20px;
+
+  border-top: 2px solid #e2e2e6;
+  background-image: url(./image/Location.png);
+  background-repeat: no-repeat;
+  background-size: 14px 14px;
+  background-position: 0% 90%;
+}
+
+.CarLike,
+.CarDelete {
+  position: absolute;
+  display: block;
+  width: 20px;
+  height: 20px;
+  /* border: 1px solid red; */
+  cursor: pointer;
+  scale: 1;
+}
+.CarLike:hover,
+.CarDelete:hover {
+  scale: 1.1;
+}
+
+.CarLike {
+  bottom: 32%;
+  right: 5%;
+
+  background: url(./image/Heart.png) no-repeat;
+  background-size: 100% 100%;
+}
+
+input:checked + .CarLike {
+  background: url(./image/RedHeart.png) no-repeat;
+  background-size: 100% 100%;
+}
+
+.CarDelete {
+  bottom: 2%;
+  right: 5%;
+
+  background: url(./image/Bin.png) no-repeat;
+  background-size: 90% 90%;
+}
+input + div {
+  transition: 0.3s;
+
+  position: absolute;
+  bottom: 2%;
+  right: 2%;
+  z-index: 999;
+
+  background-color: white;
+  color: red;
+
+  opacity: 0;
+  visibility: hidden;
+}
+input + div > button {
+  cursor: pointer;
+}
+input:focus + div {
+  opacity: 1;
+  visibility: visible;
+}
+
+input {
+  width: 0px;
+  height: 0px;
+  border: 0px;
+  outline: 0px;
+  position: absolute;
+  left: -200px;
+}
