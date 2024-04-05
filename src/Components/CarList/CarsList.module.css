@@ -42,6 +42,15 @@
   cursor: pointer;
 }
 
+.Cars > img + a {
+  display: block;
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  height: 59%;
+  top: 0;
+}
+
 .Price {
   display: flex;
   margin-top: 20px;
@@ -65,6 +74,15 @@
   letter-spacing: 2px;
   cursor: pointer;
   max-width: fit-content;
+  position: relative;
+}
+
+.CarName > a {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
 }
 
 .CarDetail,
@@ -161,7 +179,7 @@ input:focus + div {
   visibility: visible;
 }
 
-input {
+.Cars > input {
   width: 0px;
   height: 0px;
   border: 0px;

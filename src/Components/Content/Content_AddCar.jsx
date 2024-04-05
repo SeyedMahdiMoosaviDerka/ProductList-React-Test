@@ -1,15 +1,14 @@
 import React from "react";
-import CarList from "./CarList/CarList";
+import AddCar from "../AddCar/AddCar";
 
-function Content() {
+function Content_AddCar() {
   return (
     <React.Fragment>
       <div className="Content">
-        <h1>BMW Cars</h1>
-        <CarList />
+        <AddCar />
       </div>
     </React.Fragment>
   );
 }
 
-export default Content;
+export default Content_AddCar;

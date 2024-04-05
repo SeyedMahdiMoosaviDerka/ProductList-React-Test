@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { NavLink } from "react-router-dom";
 import Style from "./Menu.module.css";
 
 function Menu() {
@@ -6,8 +7,22 @@ function Menu() {
     <Fragment>
       <div className={Style.Menu}>
         <h2>MAHDI{"'"}S Test.</h2>
-        <h2 className={Style.Selected}>CarsList</h2>
-        <h2>AddCar</h2>
+        <NavLink
+          to={"/CarList"}
+          className={({ isActive }) =>
+            [isActive ? Style.Selected : ""].join(" ")
+          }
+        >
+          CarsList
+        </NavLink>
+        <NavLink
+          to={"/AddCar"}
+          className={({ isActive }) =>
+            [isActive ? Style.Selected : ""].join(" ")
+          }
+        >
+          AddCar
+        </NavLink>
       </div>
     </Fragment>
   );

@@ -8,12 +8,16 @@
   display: flex;
 }
 
-.Menu > h2 {
+.Menu > h2,
+.Menu > a {
+  display: block;
+  position: relative;
   width: fit-content;
   border: 0px;
+  text-decoration: none;
 }
 
-.Menu > h2:nth-child(1) {
+.Menu > h2 {
   color: #1001f9;
   width: fit-content;
 
@@ -21,16 +25,16 @@
   margin-top: 15px;
 }
 
-.Menu > h2:nth-child(2) {
+.Menu > a:nth-child(2) {
   margin-left: 100px;
 }
 
-.Menu > h2:nth-child(3) {
+.Menu > a:nth-child(3) {
   margin-left: 30px;
 }
 
-.Menu > h2:nth-child(2),
-.Menu > h2:nth-child(3) {
+.Menu > a:nth-child(2),
+.Menu > a:nth-child(3) {
   transition: 0.5s;
 
   margin-top: 0px;
@@ -42,8 +46,8 @@
   cursor: pointer;
 }
 
-.Menu > h2:nth-child(2):hover,
-.Menu > h2:nth-child(3):hover {
+.Menu > a:nth-child(2):hover,
+.Menu > a:nth-child(3):hover {
   color: #0b00f9;
   border-bottom: 10px solid #0b00f9;
 }

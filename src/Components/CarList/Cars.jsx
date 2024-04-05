@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Fragment } from "react";
 import Style from "./CarsList.module.css";
+import { NavLink } from "react-router-dom";
 
 function Cars({ CarObj, Delete }) {
   /*     this is for number formating:        */
@@ -21,8 +22,12 @@ function Cars({ CarObj, Delete }) {
     <Fragment>
       <div className={Style.Cars}>
         <img src={CarObj.CarImg} alt="image" />
+        <NavLink to={"/CarDetail/" + CarObj.Id}></NavLink>
 
-        <h3 className={Style.CarName}>{CarObj.CarName}</h3>
+        <h3 className={Style.CarName}>
+          {CarObj.CarName}
+          <NavLink to={"/CarDetail/" + CarObj.Id}></NavLink>
+        </h3>
 
         <p className={Style.CarDetail}>
           {CarObj.CarDetail[0] +
@@ -54,6 +59,7 @@ function Cars({ CarObj, Delete }) {
         <div>
           Are You Sure ? <button onClick={() => Delete(CarObj.Id)}>Yes</button>
         </div>
+
         <label
           htmlFor={`${Style.CarDelete + "_" + CarObj.Id}`}
           className={Style.CarDelete}
