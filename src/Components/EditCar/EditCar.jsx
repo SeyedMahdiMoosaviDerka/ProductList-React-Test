@@ -1,13 +1,19 @@
-import { Fragment } from "react";
-import Style from "./AddCar.module.css";
+import { Fragment, useEffect, useState } from "react";
+import Style from "./EditCar.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Cars from "../CarList/Cars";
 import * as yup from "yup";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Link, Navigate, redirect, useNavigate } from "react-router-dom";
+import {
+  Link,
+  Navigate,
+  redirect,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 
-function AddCar() {
+function EditCar() {
   const validation = yup.object().shape({
     CarName: yup.string().required("Enter CarName"),
     CarLocation: yup.string().required("Enter CarLocation"),
@@ -15,6 +21,38 @@ function AddCar() {
     "CarDetail[3]": yup.string().required("Enter Motor"),
     "CarPrice[0]": yup.string().required(), */
   });
+
+  const [CarList, SetCarObj] = useState([]);
+  //const [CarName, SetCarName] = useState("");
+
+  const params = useParams();
+
+  const GetCurrentEl = async () => {
+    const res = await axios.get(
+      `https://66115f7695fdb62f24ed0ab4.mockapi.io/CarList/Cars/${params.id}`
+    );
+
+    if (CarList.length == 0) SetCarObj(CarList.push(res.data));
+    delete CarList[0].id;
+
+    console.log(CarList[0]);
+  };
+
+  const NotCompelet = () => {
+    toast.error("Edit Page Not Compelet");
+    toast(
+      "The Edit Page Not Compelete. \n But You Can visit Also Detail And Add Page \n\n GOODLUCK!",
+      {
+        icon: "❤️",
+        duration: 9000,
+      }
+    );
+  };
+
+  useEffect(() => {
+    GetCurrentEl();
+    NotCompelet();
+  }, []);
 
   const navigate = useNavigate();
   const onSubmit = async (values) => {
@@ -24,10 +62,8 @@ function AddCar() {
         values
       );
       console.log(res);
-      toast.success("Successfully Added To Car List!");
-      setTimeout(() => {
-        navigate("/CarList");
-      }, 1000);
+      toast.success("Successfully Updated Current Car!");
+      navigate("/CarList");
     } catch (error) {
       alert(error);
     }
@@ -38,12 +74,13 @@ function AddCar() {
       <div className={Style.AddCarHolder}>
         <Formik
           initialValues={{
-            CarImg: "./image/Car01.png",
+            CarImg: "",
             CarName: "",
-            CarDetail: ["", "Petrol", "Manaul", ""],
+            CarDetail: ["", "", "", ""],
             CarPrice: [0, 0],
             CarLocation: "",
           }}
+          enableReinitialize={true}
           onSubmit={onSubmit}
           validationSchema={validation}
         >
@@ -62,9 +99,9 @@ function AddCar() {
                 <div>
                   <h2>CarImg:</h2>
                   <Field as="select" name="CarImg" id="CarImg">
-                    <option value="../image/Car01.png">Car 1</option>
-                    <option value="../image/Car02.png">Car 2</option>
-                    <option value="../image/Car03.png">Car 3</option>
+                    <option value="./image/Car01.png">Car 1</option>
+                    <option value="./image/Car02.png">Car 2</option>
+                    <option value="./image/Car03.png">Car 3</option>
                   </Field>
                 </div>
                 <div>
@@ -134,7 +171,7 @@ function AddCar() {
                   />
                 </div>
 
-                <button type="submit">Add</button>
+                <button type="submit">Update</button>
               </Form>
 
               <div className={Style.CarHolder}>
@@ -148,4 +185,4 @@ function AddCar() {
   );
 }
 
-export default AddCar;
+export default EditCar;

@@ -1,62 +1,68 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Style from "./CarsList.module.css";
 import Cars from "./Cars";
+import axios from "axios";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import toast from "react-hot-toast";
 
 function CarList() {
-  const [CarsList, SetCarsList] = useState([
-    {
-      Id: 1,
-      CarImg: "./image/Car01.png",
-      CarName: "BMW X5",
-      CarDetail: ["10K km", "Petrol", "Manual", "165hp"],
-      CarPrice: [35000, 3000],
-      CarLocation: "Dhanmondi, Dhaka",
-    },
-    {
-      Id: 2,
-      CarImg: "./image/Car03.png",
-      CarName: "BMW M3 Touring",
-      CarDetail: ["25K km", "Petrol", "Automatic", "165hp"],
-      CarPrice: [225000, 18899],
-      CarLocation: "Dhanmondi, Dhaka",
-    },
-    {
-      Id: 3,
-      CarImg: "./image/Car02.png",
-      CarName: "BMW i4 M50",
-      CarDetail: ["7K km", "Petrol", "Manual", "175hp"],
-      CarPrice: [75000, 8000],
-      CarLocation: "Gushan, Dhaka",
-    },
-    {
-      Id: 4,
-      CarImg: "./image/Car01.png",
-      CarName: "BMW X5",
-      CarDetail: ["10K km", "Petrol", "Manual", "165hp"],
-      CarPrice: [35000, 3000],
-      CarLocation: "Dhanmondi, Dhaka",
-    },
-    {
-      Id: 5,
-      CarImg: "./image/Car03.png",
-      CarName: "BMW M3 Touring",
-      CarDetail: ["25K km", "Petrol", "Automatic", "165hp"],
-      CarPrice: [225000, 18899],
-      CarLocation: "Dhanmondi, Dhaka",
-    },
-    {
-      Id: 6,
-      CarImg: "./image/Car02.png",
-      CarName: "BMW i4 M50",
-      CarDetail: ["7K km", "Petrol", "Manual", "175hp"],
-      CarPrice: [75000, 8000],
-      CarLocation: "Gushan, Dhaka",
-    },
+  const [CarsList, SetCarsList] = useState([]);
+  const [SkeletonList] = useState([
+    { Skeleton: "" },
+    { Skeleton: "" },
+    { Skeleton: "" },
+    { Skeleton: "" },
+    { Skeleton: "" },
+    { Skeleton: "" },
+    { Skeleton: "" },
+    { Skeleton: "" },
   ]);
 
-  const HandleDelete = (DeletID) => {
-    SetCarsList(CarsList.filter((x) => x.Id !== DeletID));
+  const HandleDelete = (DeleteID) => {
+    try {
+      axios.delete(
+        "https://66115f7695fdb62f24ed0ab4.mockapi.io/CarList/Cars/" + DeleteID
+      );
+
+      console.log("Delete succesfully / id:" + DeleteID);
+
+      SetCarsList(CarsList.filter((x) => x.id !== DeleteID));
+
+      toast.success("Successfully Removed");
+    } catch (error) {
+      alert(error);
+    }
   };
+
+  const GetCarList = async () => {
+    let res = await fetch(
+      "https://66115f7695fdb62f24ed0ab4.mockapi.io/CarList/Cars",
+      {
+        method: "GET",
+      }
+    );
+
+    res = await res.json();
+
+    //console.log(res);
+    SetCarsList(res);
+  };
+
+  const SkeletonWrapper = () => {
+    return SkeletonList.map((a, key) => (
+      <div key={key} className={Style.Skeleton}>
+        <Skeleton height={"200px"} duration={0.5} />
+        <Skeleton height={"40px"} width={"150px"} duration={0.5} />
+        <Skeleton height={"20px"} width={"250px"} duration={0.5} />
+        <Skeleton height={"20px"} width={"300px"} duration={0.5} />
+      </div>
+    ));
+  };
+
+  useEffect(() => {
+    GetCarList();
+  }, []);
 
   return (
     <Fragment>
@@ -68,7 +74,7 @@ function CarList() {
             <Cars CarObj={car} key={key} Delete={(e) => HandleDelete(e)} />
           ))
         ) : (
-          <h1> There is No car Yet! </h1>
+          <SkeletonWrapper />
         )}
       </div>
     </Fragment>

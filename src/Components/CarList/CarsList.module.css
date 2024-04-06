@@ -1,6 +1,6 @@
 .CarsListHolder {
   width: 95%;
-  height: 800px;
+  /* height: 800px; */
   /* border: 1px solid red; */
   margin-left: 5%;
   display: flex;
@@ -159,6 +159,25 @@ input:checked + .CarLike {
   background: url("../../assets/BG_Image/Bin.png") no-repeat;
   background-size: 90% 90%;
 }
+
+.CarEdit {
+  bottom: 2.5%;
+  right: 14%;
+
+  position: absolute;
+
+  background: url("../../assets/BG_Image/CarEdit.png") no-repeat;
+  background-size: 100% 100%;
+
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.CarEdit:hover {
+  scale: 1.1;
+}
+
 input + div {
   transition: 0.3s;
 
@@ -188,4 +207,36 @@ input:focus + div {
   outline: 0px;
   position: absolute;
   left: -200px;
+}
+
+.Skeleton {
+  width: 330px;
+  height: 360px;
+
+  border-radius: 10px;
+
+  border: 2px solid #e2e2e6;
+  background-color: #ffffff;
+
+  position: relative;
+  box-shadow: none;
+}
+
+.Skeleton > span {
+  display: block;
+}
+
+.Skeleton > span:nth-child(2) {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.Skeleton > span:nth-child(3) {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.Skeleton > span:nth-child(4) {
+  margin-top: 15px;
+  margin-left: 20px;
 }
